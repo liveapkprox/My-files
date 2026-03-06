@@ -1,16 +1,24 @@
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+<title>Live Stream</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
 
-$id = $_GET['id'];
+<body>
 
-$streams = [
-"mbc1" => "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8"
-];
+<video id="video" controls autoplay width="100%"></video>
 
-if(!isset($streams[$id])){
- die("Channel not found");
+<script>
+var video = document.getElementById('video');
+var videoSrc = "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8";
+
+if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(video);
 }
+</script>
 
-header("Location: ".$streams[$id]);
-exit;
-
-?>
+</body>
+</html>
